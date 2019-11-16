@@ -1,0 +1,129 @@
+clc;clear all;close all;
+iterations=10000;
+y = [607, 583, 521, 494, 369, 782, 570, 678, 467, 620, 425, 395, 346, 361, 310, 300, 382, 294, 315, 323, 421, 339, 398, 328, 335, 291, 329, 310, 294, 321, 286, 349, 279, 268, 293, 310, 259, 241, 243, 272, 247, 275, 220, 245, 268, 357, 273, 301, 322, 276, 401, 368, 149, 507, 411, 362, 358, 355, 362, 324, 332, 268, 259, 274, 248, 254, 242, 286, 276, 237, 259, 251, 239, 247, 260, 237, 206, 242, 361, 267, 245, 331, 357, 284, 263, 244, 317, 225, 254, 253, 251, 314, 239, 248, 250, 200, 256, 233, 427, 391, 331, 395, 337, 392, 352, 381, 330, 368, 381, 316, 335, 316, 302, 375, 361, 330, 351, 186, 221, 278, 244, 218, 126, 269, 238, 194, 384, 154, 555, 387, 317, 365, 357, 390, 320, 316, 297, 354, 266, 279, 327, 285, 258, 267, 226, 237, 264, 510, 490, 458, 425, 522, 927, 555, 550, 516, 548, 560, 545, 633, 496, 498, 223, 222, 309, 244, 207, 258, 255, 281, 258, 226, 257, 263, 266, 238, 249, 340, 247, 216, 241, 239, 226, 273, 235, 251, 290, 473, 416, 451, 475, 406, 349, 401, 334, 446, 401, 252, 266, 210, 228, 250, 265, 236, 289, 244, 327, 274, 223, 327, 307, 338, 345, 381, 369, 445, 296, 303, 326, 321, 309, 307, 319, 288, 299, 284, 278, 310, 282, 275, 372, 295, 306, 303, 285, 316, 294, 284, 324, 264, 278, 369, 254, 306, 237, 439, 287, 285, 261, 299, 311, 265, 292, 282, 271, 268, 270, 259, 269, 249, 261, 425, 291, 291, 441, 222, 347, 244, 232, 272, 264, 190, 219, 317, 232, 256, 185, 210, 213, 202, 226, 250, 238, 252, 233, 221, 220, 287, 267, 264, 273, 304, 294, 236, 200, 219, 276, 287, 365, 438, 420, 396, 359, 405, 397, 383, 360, 387, 429, 358, 459, 371, 368, 452, 358, 371];
+ind = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5,5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11,11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,12, 12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14, 14, 14, 14, 14, 14, 14, 14, 14,14, 14, 14, 14, 15, 15, 15, 15, 15, 15, 16, 16, 16, 16, 16, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18,19, 19, 19, 19, 19, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 23, 23, 23,23, 23, 23, 23, 23, 23, 23, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24,24, 24, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 26, 26, 26, 26, 26, 27, 27, 27, 27, 27,28, 28, 28, 28, 28, 28, 28, 28, 28, 29, 29, 29, 29, 29, 29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30,31, 31, 31, 31, 31, 32, 32, 32, 32, 32, 33, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34, 34,34, 34, 34, 34];
+y_cell = {[607, 583, 521, 494, 369], [782, 570, 678, 467, 620], [425, 395, 346, 361, 310, 300, 382, 294, 315], [323], [421, 339, 398, 328, 335, 291, 329, 310, 294, 321, 286, 349, 279, 268, 293, 310], [259, 241, 243, 272, 247, 275, 220, 245, 268], [357, 273, 301, 322, 276], [401, 368, 149, 507, 411], [362, 358, 355, 362, 324], [332, 268, 259, 274, 248, 254, 242, 286, 276, 237, 259, 251, 239, 247, 260, 237, 206, 242], [361, 267, 245, 331, 357, 284, 263, 244, 317, 225, 254, 253, 251, 314, 239, 248, 250, 200, 256, 233], [427, 391, 331, 395, 337, 392, 352, 381, 330, 368, 381, 316, 335, 316, 302, 375, 361, 330, 351, 186], [221, 278, 244, 218, 126, 269, 238, 194, 384, 154], [555, 387, 317, 365, 357, 390, 320, 316, 297, 354, 266, 279, 327], [285, 258, 267, 226, 237, 264], [510, 490, 458, 425, 522], [927, 555, 550, 516, 548], [560, 545, 633, 496, 498], [223, 222, 309, 244, 207], [258, 255, 281, 258, 226, 257, 263, 266, 238, 249, 340, 247, 216, 241, 239, 226, 273, 235, 251, 290], [473, 416, 451, 475, 406, 349, 401, 334, 446, 401], [252, 266, 210, 228, 250, 265, 236, 289, 244, 327, 274, 223], [327, 307, 338, 345, 381, 369, 445, 296, 303, 326], [321, 309, 307, 319, 288, 299, 284, 278, 310, 282, 275, 372, 295, 306, 303, 285, 316, 294, 284, 324], [264, 278, 369, 254, 306, 237, 439, 287, 285, 261, 299, 311, 265], [292, 282, 271, 268, 270], [259, 269, 249, 261, 425], [291, 291, 441, 222, 347, 244, 232, 272, 264], [190, 219, 317, 232, 256, 185, 210, 213, 202, 226], [250, 238, 252, 233, 221, 220], [287, 267, 264, 273, 304], [294, 236, 200, 219, 276], [287], [365, 438, 420, 396, 359, 405, 397, 383, 360, 387, 429, 358, 459, 371, 368, 452, 358, 371]};
+
+I = length(y);
+J = 34;
+logy = log(y);
+mean_logy = mean(logy);
+std_logy = std(logy);
+log_post=@(beta) logprior_theta(beta(1:34),beta(36),beta(37))+loglikelihood(y_cell,logy,beta(1:34),beta(35))+logprior_mu(beta(36))+logprior_tau(beta(37))+logprior_sigma(beta(35));
+initial=ones(1,37);
+posterior=slicesample(initial,iterations,'logpdf',log_post,'width',1);
+
+        %%%Task A%%%
+theta_samp = posterior(:,1:J);
+sigma_samp = posterior(:,J + 1);
+mu_samp= posterior(:,J + 2);
+tau_samp = posterior(:,J + 3);
+sigma2_samp = std_logy*sigma_samp;
+theta2_samp = std_logy*theta_samp+mean_logy;
+
+for l=1:1:34
+  mu_y_samp(:,l)=exp(theta2_samp(:,l)+(sigma2_samp.^2)/2);  
+    
+end
+
+                %%%Task A-1%%%
+figure(1)
+h=histogram(mu_y_samp(:,4),200,'normalization','pdf');
+title("The expected reaction time for the dude");grid on;
+mean1=mean(mu_y_samp(:,4));
+median1=median(mu_y_samp(:,4));
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);lower_level1=prctile(mu_y_samp(:,4),2.5);
+higher_level1=prctile(mu_y_samp(:,4),97.5);
+fprintf('-.-.-.-.-.-.-.-.-.- Task A-1 .-.-.-.-.-.-.-.-.-.-.-\n');
+fprintf('For the individual called “the dude”: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('Credible Interval=[%.3f, %.3f]\n',lower_level1,higher_level1);
+    %%%%%%%%%Task A-2-i%%%%%%%%%%%%
+mu2_samp = std_logy * mu_samp + mean_logy;
+tau2_samp = std_logy * tau_samp;
+exp_mu2_samp = exp(mu2_samp+0.5*tau2_samp.^2+0.5* sigma2_samp.^2);
+figure(2)
+h=histogram(exp_mu2_samp,200,'normalization','pdf');
+title("expected reaction time for the group");grid on;
+mean1=mean(exp_mu2_samp);
+median1=median(exp_mu2_samp);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);
+lower_level1=prctile(exp_mu2_samp,2.5);
+higher_level1=prctile(exp_mu2_samp,97.5);
+fprintf('\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n');
+fprintf('The group’s reaction time: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('Credible Interval=[%.3f, %.3f]\n',lower_level1,higher_level1);
+%%%%%%%%%Task A-2-ii%%%%%%%%%%%%
+
+y_pred = zeros(iterations,1);
+for l=1:1:iterations
+    theta_l = mu_samp(l) + tau_samp(l) * randn(1);
+    logzy_l = theta_l + sigma_samp(l) * randn(1);
+    logy_l= std_logy * logzy_l + mean_logy;
+    y_pred(l) = exp(logy_l);
+end
+figure(3)
+h=histogram(y_pred,200,'normalization','pdf');
+title("Posterior predictive distribution for a random individual");grid on;
+mean1=mean(y_pred);
+median1=median(y_pred);
+[a b]=max(h.Values);
+mode1=b*h.BinWidth+h.BinLimits(1);lower_level1=prctile(y_pred,2.5);
+higher_level1=prctile(y_pred,97.5);
+fprintf('\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n');
+fprintf('For a random individual: mean=%.3f,median=%.3f,mode=%.3f\n',mean1,median1,mode1);
+fprintf('Credible Interval=[%.3f, %.3f]\n',lower_level1,higher_level1);
+    
+%%%%%%%%%Task A-3%%%%%%%%%%%%
+for l=1:1:J
+sample_mean(l)=mean(theta2_samp(:,l));
+ind_mean(l)=mean(log(cell2mat(y_cell(l))));
+
+end
+group_mean=mean(log(cell2mat(y_cell)));
+
+figure(4)
+scatter(1:1:J,sample_mean);
+hold on;
+scatter(1:1:J,ind_mean);
+hold on;
+plot(1:1:J,group_mean*ones(1,J));
+grid on;
+legend('With Hierarchical','Without Hierarchical','Group Mean');
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function r=logprior_theta(theta,mu,tau)
+r=sum(-log(tau)-0.5 *((theta(1:34)-mu)./tau).^2);
+end
+%
+function r=logprior_sigma(sigma)
+ 
+r=log(double(sigma>0));
+
+end
+%
+function r=logprior_mu(mu)
+r=log(1);
+end
+%
+function r=logprior_tau(tau)
+r=log(double(tau>0)); 
+end
+
+%%
+
+function r=loglikelihood(y_cell,logy,theta,sigma)
+
+r=0;
+s=size(y_cell);
+for l=1:1:s(2) 
+    ss=y_cell(l);
+    zlogy=(log(cell2mat(ss))-mean(logy)) ./ std(logy);
+    for m=1:1:length(zlogy)
+    r=r+ -log(sigma) - 0.5 *((zlogy(m) - theta(l))/sigma)^2;
+    end
+end
+end
+
